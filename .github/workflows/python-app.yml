@@ -36,5 +36,5 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Launch Flask
       run: |
-        python.exe -m flask run 
+        python -m flask run 
         
