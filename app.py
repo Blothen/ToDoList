@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, make_response, redirect
-from ToDoList.main import add_user, get_user, __todo, check_user
+from ToDoList.main import add_user, get_user, check_user
 
 app = Flask(__name__)
 
