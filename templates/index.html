@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link rel="stylesheet" href="../static/styles.css">
     <link rel="icon" type="image/png" href="../static/favicon.ico">
+    <link rel="stylesheet" href="../static/styles.css">
     <title>To-Do List</title>
 </head>
 <body>
@@ -15,7 +15,7 @@
 
         <!-- Login Section -->
         <div class="login-section">
-            <h2>Login</h2>
+            <h2>Login <i class="fas fa-sign-in-alt"></i></h2>
             <form id="login-form" action="/login" method="post">
                 <div class="form-group">
                     <label for="username">Username:</label>
@@ -25,13 +25,13 @@
                     <label for="password">Password:</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
             </form>
         </div>
 
         <!-- Signup Section -->
         <div class="signup-section">
-            <h2>Sign Up</h2>
+            <h2>Sign Up <i class="fas fa-user-plus"></i></h2>
             <form method="post" action="/register">
                 <div class="form-group">
                     <label for="signup-username">Username:</label>
@@ -41,11 +41,13 @@
                     <label for="signup-password">Password:</label>
                     <input type="password" class="form-control" id="signup-password" name="password" required>
                 </div>
-                <button type="submit" class="btn btn-success">Sign Up</button>
+                <button type="submit" class="btn btn-success btn-block">Sign Up</button>
             </form>
         </div>
     </div>
-
+    <div class="footer">
+        <p>2023 Ciaran Johnson.</p>
+    </div>
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>

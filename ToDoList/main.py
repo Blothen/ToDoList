@@ -1,54 +1,35 @@
-import json
-import yaml
-import hashlib
-
-db_file = "../storage/users.yaml"  # Replace with the actual file name and extension
+from ToDoList.JsonHandler import read_json_file, add_data_to_json, remove_and_decrement, update_status
+from ToDoList.UserRegistration import add_user
 
 
-def check_user(user):
-    with open(db_file, "r") as f:
-        try:
-            data = yaml.safe_load(f)
-        except yaml.YAMLError:
-            data = {'username': [], 'passwords': {}}
-
-    return user in data.get('username', [])
+db_file = "./storage/users.yaml"
 
 
-def check_password(password):
-    password_hash = hashlib.md5(password.encode()).hexdigest()
-    with open(db_file, "r") as f:
-        try:
-            data = yaml.safe_load(f)
-        except yaml.YAMLError:
-            data = {'username': [], 'passwords': {}}
-
-    return password_hash in data.get('passwords', {}).values()
+def retrieve_tasks(user):
+    file = "./storage/" + user + ".json"
+    data = read_json_file(file)
+    return data
 
 
-def get_user(user, passwd):
-    password_hash = hashlib.md5(passwd.encode()).hexdigest()
-    return check_user(user) and check_password(password_hash)
+def add_tasks(user, task):
+    file = "./storage/" + user + ".json"
+    add_data_to_json(file, task)
 
 
-def add_user(user, passwd):
-    with open(db_file, "r+") as f:
-        try:
-            data = yaml.safe_load(f)
-        except yaml.YAMLError:
-            data = {'username': [], 'passwords': {}}
+def remove_tasks(user, task):
+    file = "./storage/" + user + ".json"
+    remove_and_decrement(file, task)
 
-        if user not in data['username']:
-            data['username'] = data['username'] + [user]
-            password_hash = hashlib.md5(passwd.encode()).hexdigest()
-            data['passwords'][user] = password_hash
-            f.seek(0)
-            yaml.dump(data, f, default_flow_style=False)
-            f.truncate()
-            f.seek(0)
-            print("Added user:", user)
-            print(yaml.dump(data, default_flow_style=False))
+
+def complete_tasks(user, task):
+    file = "./storage/" + user + ".json"
+    update_status(user, task, file)
 
 
 if __name__ == '__main__':
-    add_user("new_user", "new_password")
+    db_file = "../storage/users.yaml"
+    add_user("admin", "admin", db_file)
+    add_tasks("admin", "admin", True)
+    retrieve_tasks("admin")
+    #remove_tasks("admin", "admin")
+    retrieve_tasks("admin")

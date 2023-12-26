@@ -1,0 +1,95 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #343a40; /* Darker background color */
+    color: #fff; /* Light text color */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #495057; /* Darker container background color */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Light shadow */
+    border-radius: 8px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #dee2e6; /* Light heading text color */
+}
+
+.todo-container {
+    margin-top: 20px;
+}
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #212529; /* Darker task background color */
+    border: 1px solid #343a40; /* Darker border color */
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.todo-item i {
+    cursor: pointer;
+}
+
+.todo-item.checked {
+    background-color: #343a40; /* Even darker background for checked tasks */
+    color: #adb5bd; /* Lighter text color for checked tasks */
+    text-decoration: line-through;
+}
+
+.add-todo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.add-todo input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #343a40; /* Darker border color for input */
+    border-radius: 4px;
+    margin-right: 10px;
+    background-color: #212529; /* Darker input background color */
+    color: #fff; /* Light text color for input */
+}
+
+.add-todo button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+.text-right {
+    text-align: right;
+    margin-bottom: 20px;
+}
+.footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333; /* Dark background color for the footer */
+            color: #fff; /* Light text color for the footer */
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }

@@ -5,83 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link rel="stylesheet" href="../static/styles.css">
+    <script src="../static/todo.js" defer></script>
+    <link rel="stylesheet" href="../static/todo.css">
     <link rel="icon" type="image/png" href="../static/favicon.ico">
     <title>To-Do List</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212; /* Dark background color */
-            color: #fff; /* Light text color */
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 50px auto;
-            background-color: #212121; /* Darker container background color */
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Light shadow */
-            border-radius: 8px;
-        }
-
-        h1, h2 {
-            text-align: center;
-            color: #bbb; /* Light heading text color */
-        }
-
-        .todo-container {
-            margin-top: 20px;
-        }
-
-        .todo-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            background-color: #333; /* Darker task background color */
-            border: 1px solid #555; /* Darker border color */
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-
-        .todo-item i {
-            cursor: pointer;
-        }
-
-        .todo-item.checked {
-            background-color: #555; /* Even darker background for checked tasks */
-            color: #aaa; /* Lighter text color for checked tasks */
-            text-decoration: line-through;
-        }
-
-        .add-todo {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .add-todo input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #555; /* Darker border color for input */
-            border-radius: 4px;
-            margin-right: 10px;
-            background-color: #333; /* Darker input background color */
-            color: #fff; /* Light text color for input */
-        }
-
-        .add-todo button {
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -90,70 +17,43 @@
         <div class="text-right">
             <a href="/logout" class="btn btn-danger">Log Out</a>
         </div>
-
-        <!-- To-Do List Section -->
         <div class="todo-container" id="todoContainer">
-        </div>
-            <!-- Add more tasks as needed -->
+            {% for item in task.data %}
+                {% set task_data = {'task': item.task, 'completed': item.completed} %}
+                {% set task = task_data['task'] %}
+                {% set completed = task_data['completed'] %}
 
-            <div class="add-todo">
+                <p>Task: {{ task }}</p>
+                <p>Completed: {{ completed }}</p>
+
+                {% if not completed %}
+                    <button class="btn btn-success" onclick="completeTask('{{ task }}')">
+                        <i class="fas fa-check"></i> Complete
+                    </button>
+                {% endif %}
+
+                <button class="btn btn-danger" onclick="removeTask('{{ task }}')">
+                    <i class="fas fa-trash"></i> Remove
+                </button>
+            {% endfor %}
+        </div>
+        <div class="add-todo">
             <label>
                 <input type="text" id="newTaskInput" placeholder="Add a new task">
             </label>
-            <button id="addTaskButton"><i class="fas fa-plus"></i> Add Task</button>
-        </div>
+            <button class="btn btn-primary" id="addTaskButton" onclick="addTask()">
+                <i class="fas fa-plus"></i> Add Task
+            </button>
         </div>
     </div>
-
+    <div class="footer">
+        <p>2023 Ciaran Johnson.</p>
+    </div>
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Font Awesome JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
-
-    <script>
-       document.addEventListener('DOMContentLoaded', function () {
-            // Simulated JSON response
-            const jsonResponse = [
-                { task: 'Task 1', completed: false },
-                { task: 'Task 2', completed: true },
-                { task: 'Task 3', completed: false }
-                // Add more tasks as needed
-            ];
-
-            const todoContainer = document.getElementById('todoContainer');
-            const addTaskButton = document.getElementById('addTaskButton');
-            const newTaskInput = document.getElementById('newTaskInput');
-
-            // Function to create a new todo item
-            function createTodoItem(task, completed) {
-                const newTask = document.createElement('div');
-                newTask.className = `todo-item ${completed ? 'checked' : ''}`;
-                newTask.innerHTML = `
-                    <span>${task}</span>
-                    <i class="fas fa-check"></i>
-                `;
-                return newTask;
-            }
-
-            // Populate the to-do list from the JSON response
-            jsonResponse.forEach(taskData => {
-                const newTaskItem = createTodoItem(taskData.task, taskData.completed);
-                todoContainer.appendChild(newTaskItem);
-            });
-
-            // Add new task event listener
-            addTaskButton.addEventListener('click', function () {
-                const taskText = newTaskInput.value.trim();
-
-                if (taskText !== '') {
-                    const newTaskItem = createTodoItem(taskText, false);
-                    todoContainer.appendChild(newTaskItem);
-                    newTaskInput.value = '';
-                }
-            });
-        });
-    </script>
 </body>
 </html>
