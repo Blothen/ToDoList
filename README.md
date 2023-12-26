@@ -2,6 +2,9 @@
 
 This is a simple Flask application for managing a to-do list. The application includes user authentication (login and registration) and allows users to add, remove, and mark tasks as complete.
 
+![Local Image](images/Login.png)
+![Local Image](images/Dashboard.png)
+
 ## Dependencies
 
 The application uses the following dependencies:

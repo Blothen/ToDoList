@@ -28,6 +28,11 @@
                 <button type="submit" class="btn btn-primary btn-block">Login</button>
             </form>
         </div>
+        {% if error_message %}
+        <div class="alert alert-danger">
+            {{ error_message }}
+        </div>
+    {% endif %}
 
         <!-- Signup Section -->
         <div class="signup-section">

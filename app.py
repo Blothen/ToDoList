@@ -32,7 +32,8 @@ def login():
         return resp
     else:
         print(f"Received incorrect login request. Username: {username}")
-        return "incorrect password"
+        error_message = "Invalid username or password"
+        return render_template('index.html', error_message=error_message)
 
 
 @app.route('/register', methods=['POST'])
@@ -47,7 +48,8 @@ def signup():
         resp.set_cookie('logged_in', 'yes', max_age=28480)
         return resp
     else:
-        return f"Username {username} already exists"
+        error_message = "Username already exists"
+        return render_template('index.html', error_message=error_message)
 
 
 @app.route('/todo', methods=['POST', 'GET'])

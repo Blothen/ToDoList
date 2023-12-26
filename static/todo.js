@@ -1,9 +1,11 @@
- function addTask() {
+const currentURL = window.location.href;
+
+function addTask() {
         const inputElement = document.getElementById("newTaskInput");
         const inputValue = inputElement.value.trim();
 
         if (inputValue !== "") {
-            const url = "http://localhost:5000/todo/add/" + encodeURIComponent(inputValue);
+            const url = currentURL + "/add/" + encodeURIComponent(inputValue);
             const data = { task: inputValue };
 
             fetchTaskOperation(url, data);
@@ -16,7 +18,7 @@
         const inputValue = task.trim();
 
         if (inputValue !== "") {
-            const url = "http://localhost:5000/todo/remove/" + encodeURIComponent(inputValue);
+            const url = currentURL + "/remove/" + encodeURIComponent(inputValue);
             const data = { task: inputValue };
 
             fetchTaskOperation(url, data);
@@ -29,7 +31,7 @@
         const inputValue = task.trim();
 
         if (inputValue !== "") {
-            const url = "http://localhost:5000/todo/complete/" + encodeURIComponent(inputValue);
+            const url = currentURL + "/complete/" + encodeURIComponent(inputValue);
             const data = { task: inputValue };
 
             fetchTaskOperation(url, data);
@@ -63,3 +65,6 @@
             console.error('There was a problem with the fetch operation:', error);
         });
     }
+
+
+
